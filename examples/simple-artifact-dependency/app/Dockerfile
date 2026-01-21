@@ -7,7 +7,9 @@ COPY go.mod .
 ARG SKAFFOLD_GO_GCFLAGS
 RUN go build -gcflags="${SKAFFOLD_GO_GCFLAGS}" -trimpath -o /app .
 
-FROM $BASE
+FROM $BASE as base
+
+FROM scratch
 # Define GOTRACEBACK to mark this container as using the Go language runtime
 # for `skaffold debug` (https://skaffold.dev/docs/workflows/debug/).
 ENV GOTRACEBACK=single
